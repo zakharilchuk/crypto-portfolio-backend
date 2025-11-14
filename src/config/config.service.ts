@@ -8,4 +8,24 @@ export class AppConfigService {
   get port(): number {
     return Number(this.configService.get<number>('app.port'));
   }
+
+  get databaseName(): string {
+    return this.configService.get<string>('database.name')!;
+  }
+
+  get databaseUser(): string {
+    return this.configService.get<string>('database.user')!;
+  }
+
+  get databasePassword(): string {
+    return this.configService.get<string>('database.password')!;
+  }
+
+  get databasePort(): number {
+    return Number(this.configService.get<number>('database.port'));
+  }
+
+  get databaseHost(): string {
+    return this.configService.get<string>('database.host')!;
+  }
 }
