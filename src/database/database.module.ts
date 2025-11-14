@@ -17,6 +17,7 @@ import { AppConfigModule } from 'src/config/config.module';
         database: config.databaseName,
         autoLoadEntities: true,
         logging: true,
+        synchronize: true,
       }),
     }),
   ],
