@@ -74,7 +74,7 @@ describe('UserService', () => {
       });
 
       await expect(userService.createUser(createUserDto)).rejects.toThrow(
-        'User with this email already exists',
+        'user with this email already exists',
       );
       expect(mockedUserRepository.findByEmail).toHaveBeenCalledWith(
         createUserDto.email,
