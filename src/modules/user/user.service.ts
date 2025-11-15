@@ -15,6 +15,10 @@ export class UserService {
     return await this.userRepository.findByEmail(email);
   }
 
+  public async findById(userId: number): Promise<User | null> {
+    return await this.userRepository.findById(userId);
+  }
+
   public async createUser(createUserDto: CreateUserDto) {
     const existingUser = await this.userRepository.findByEmail(
       createUserDto.email,
@@ -31,5 +35,12 @@ export class UserService {
       email: createUserDto.email,
       password: hashedPassword,
     });
+  }
+
+  public async isPasswordValid(
+    plainTextPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
+    return await bcrypt.compare(plainTextPassword, hashedPassword);
   }
 }

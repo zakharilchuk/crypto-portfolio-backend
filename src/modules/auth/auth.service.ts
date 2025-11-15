@@ -1,8 +1,13 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { RegisterDto } from './dtos/register.dto';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { AppConfigService } from '../../config/config.service';
+import { LoginDto } from './dtos/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -34,6 +39,48 @@ export class AuthService {
     }
   }
 
+  public async login(
+    loginDto: LoginDto,
+  ): Promise<{ accessToken: string; refreshToken: string }> {
+    const user = await this.userService.findByEmail(loginDto.email);
+
+    const isPasswordValid =
+      user &&
+      (await this.userService.isPasswordValid(
+        loginDto.password,
+        user.password,
+      ));
+
+    if (!user || !isPasswordValid) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
+
+    const accessToken = await this.generateAccessToken(user.id);
+    const refreshToken = await this.generateRefreshToken(user.id);
+
+    return { accessToken, refreshToken };
+  }
+
+  public async refreshTokens(
+    refreshToken: string,
+  ): Promise<{ accessToken: string; newRefreshToken: string }> {
+    try {
+      const payload: { sub: number } = await this.jwtService.verifyAsync(
+        refreshToken,
+        {
+          secret: this.configService.refreshTokenSecretKey,
+        },
+      );
+
+      const userId = payload.sub;
+      const accessToken = await this.generateAccessToken(userId);
+      const newRefreshToken = await this.generateRefreshToken(userId);
+
+      return { accessToken, newRefreshToken };
+    } catch {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+  }
   public async generateAccessToken(userId: number): Promise<string> {
     const payload = { sub: userId };
 
