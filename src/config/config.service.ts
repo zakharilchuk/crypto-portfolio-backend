@@ -28,4 +28,20 @@ export class AppConfigService {
   get databaseHost(): string {
     return this.configService.get<string>('database.host')!;
   }
+
+  get accessTokenSecretKey(): string {
+    return this.configService.get<string>('app.accessTokenSecretKey')!;
+  }
+
+  get accessTokenExpirationTime(): number {
+    return this.configService.get<number>('app.accessTokenExpirationTime')!;
+  }
+
+  get refreshTokenSecretKey(): string {
+    return this.configService.get<string>('app.refreshTokenSecretKey')!;
+  }
+
+  get refreshTokenExpirationTime(): number {
+    return this.configService.get<number>('app.refreshTokenExpirationTime')!;
+  }
 }

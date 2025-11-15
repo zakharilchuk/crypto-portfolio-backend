@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { UserRepository } from './user.repository';
 import { USER_REPOSITORY } from './interface/user.repository';
+import { UserService } from './user.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -11,6 +12,8 @@ import { USER_REPOSITORY } from './interface/user.repository';
       provide: USER_REPOSITORY,
       useClass: UserRepository,
     },
+    UserService,
   ],
+  exports: [UserService],
 })
 export class UserModule {}
