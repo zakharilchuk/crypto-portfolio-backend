@@ -1,6 +1,12 @@
+// fix through interface
+
 export default () => ({
   app: {
     port: parseInt(process.env.APP_PORT ?? '8080', 10),
+    accessTokenSecretKey: process.env.ACCESS_TOKEN_SECRET_KEY,
+    accessTokenExpirationTime: process.env.ACCESS_TOKEN_EXPIRATION_TIME,
+    refreshTokenSecretKey: process.env.REFRESH_TOKEN_SECRET_KEY,
+    refreshTokenExpirationTime: process.env.REFRESH_TOKEN_EXPIRATION_TIME,
   },
   database: {
     user: process.env.POSTGRES_USER ?? 'postgres',
