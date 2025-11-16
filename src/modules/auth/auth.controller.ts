@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { RegisterDto } from './dtos/register.dto';
 import type { Response, Request } from 'express';
 import { LoginDto } from './dtos/login.dto';
-import { AuthGuard } from '@nestjs/passport';
+import { RefreshTokenGuard } from './guards/refresh-token.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -38,7 +38,7 @@ export class AuthController {
     return res.status(200).json({ accessToken });
   }
 
-  @UseGuards(AuthGuard('refresh'))
+  @UseGuards(RefreshTokenGuard)
   @Post('refresh')
   public async refresh(@Req() req: Request, @Res() res: Response) {
     const request = req as Request & {

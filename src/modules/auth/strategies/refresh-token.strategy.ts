@@ -23,6 +23,7 @@ export class RefreshTokenStrategy extends PassportStrategy(
           return request?.cookies?.refreshToken ?? null;
         },
       ]),
+      ignoreExpiration: false,
       secretOrKey: appConfigService.refreshTokenSecretKey,
     });
   }
