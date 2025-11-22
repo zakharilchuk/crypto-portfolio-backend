@@ -4,12 +4,18 @@ import { RegisterDto } from './dtos/register.dto';
 import type { Response, Request } from 'express';
 import { LoginDto } from './dtos/login.dto';
 import { RefreshTokenGuard } from './guards/refresh-token.guard';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('register')
+  @ApiOperation({ summary: 'Register a new user' })
+  @ApiResponse({ status: 201, description: 'User registered successfully' })
+  @ApiResponse({ status: 409, description: 'Conflict. Email already in use' })
+  @ApiResponse({ status: 400, description: 'Bad Request. Validation errors' })
   public async register(
     @Body() registerDto: RegisterDto,
     @Res() res: Response,
@@ -26,6 +32,13 @@ export class AuthController {
   }
 
   @Post('login')
+  @ApiOperation({ summary: 'Login a user' })
+  @ApiResponse({ status: 200, description: 'User logged in successfully' })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized. Invalid credentials',
+  })
+  @ApiResponse({ status: 400, description: 'Bad Request. Validation errors' })
   public async login(@Body() loginDto: LoginDto, @Res() res: Response) {
     const { accessToken, refreshToken } =
       await this.authService.login(loginDto);
@@ -40,6 +53,12 @@ export class AuthController {
 
   @UseGuards(RefreshTokenGuard)
   @Post('refresh')
+  @ApiOperation({ summary: 'Refresh tokens' })
+  @ApiResponse({ status: 200, description: 'Tokens refreshed successfully' })
+  @ApiResponse({
+    status: 401,
+    description: 'Unauthorized. Invalid refresh token',
+  })
   public async refresh(@Req() req: Request, @Res() res: Response) {
     const request = req as Request & {
       cookies?: { refreshToken?: string };
@@ -60,6 +79,8 @@ export class AuthController {
   }
 
   @Post('logout')
+  @ApiOperation({ summary: 'Log out a user' })
+  @ApiResponse({ status: 200, description: 'User logged out successfully' })
   public logOut(@Res() res: Response) {
     res.clearCookie('refreshToken');
     res.json({ message: 'Logged out successfully' });

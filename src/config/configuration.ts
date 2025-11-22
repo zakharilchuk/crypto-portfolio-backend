@@ -3,6 +3,8 @@
 export default () => ({
   app: {
     port: parseInt(process.env.APP_PORT ?? '8080', 10),
+    name: process.env.APP_NAME ?? 'Crypto Portfolio Tracker API',
+    version: process.env.APP_VERSION ?? '1.0.0',
     accessTokenSecretKey: process.env.ACCESS_TOKEN_SECRET_KEY,
     accessTokenExpirationTime: process.env.ACCESS_TOKEN_EXPIRATION_TIME,
     refreshTokenSecretKey: process.env.REFRESH_TOKEN_SECRET_KEY,

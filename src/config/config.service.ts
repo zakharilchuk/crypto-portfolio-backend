@@ -9,6 +9,14 @@ export class AppConfigService {
     return Number(this.configService.get<number>('app.port'));
   }
 
+  get appName(): string {
+    return this.configService.get<string>('app.name')!;
+  }
+
+  get appVersion(): string {
+    return this.configService.get<string>('app.version')!;
+  }
+
   get databaseName(): string {
     return this.configService.get<string>('database.name')!;
   }
