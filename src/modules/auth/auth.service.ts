@@ -6,7 +6,7 @@ import {
 import { RegisterDto } from './dtos/register.dto';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
-import { AppConfigService } from '../../config/config.service';
+import { AppConfigService } from '../../config/app.config.service';
 import { LoginDto } from './dtos/login.dto';
 
 @Injectable()

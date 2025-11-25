@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AppConfigService } from './config.service';
+import { AppConfigService } from './app.config.service';
 import { validationSchema } from './validation';
 import configuration from './configuration';
+import { DatabaseConfigService } from './database.config.service';
 
 @Module({
   imports: [
@@ -12,7 +13,7 @@ import configuration from './configuration';
       validationSchema,
     }),
   ],
-  providers: [AppConfigService, ConfigService],
-  exports: [AppConfigService],
+  providers: [AppConfigService, ConfigService, DatabaseConfigService],
+  exports: [AppConfigService, DatabaseConfigService],
 })
 export class AppConfigModule {}
