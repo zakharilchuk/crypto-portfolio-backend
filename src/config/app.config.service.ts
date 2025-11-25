@@ -32,16 +32,4 @@ export class AppConfigService {
   get refreshTokenExpirationTime(): number {
     return this.configService.get<number>('app.refreshTokenExpirationTime')!;
   }
-
-  get emailHost(): string {
-    return this.configService.get<string>('mailer.host')!;
-  }
-
-  get emailUsername(): string {
-    return this.configService.get<string>('mailer.username')!;
-  }
-
-  get emailPassword(): string {
-    return this.configService.get<string>('mailer.password')!;
-  }
 }
