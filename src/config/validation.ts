@@ -13,4 +13,7 @@ export const validationSchema = Joi.object({
   POSTGRES_DB: Joi.string().default('crypto_portfolio'),
   POSTGRES_PORT: Joi.number().default(5432),
   POSTGRES_HOST: Joi.string().default('localhost'),
+  EMAIL_HOST: Joi.string().required(),
+  EMAIL_USERNAME: Joi.string().required(),
+  EMAIL_PASSWORD: Joi.string().required(),
 });
