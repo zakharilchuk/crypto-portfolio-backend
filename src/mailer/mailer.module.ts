@@ -1,7 +1,7 @@
 import { MailerModule } from '@nestjs-modules/mailer';
 import { Module } from '@nestjs/common';
 import { AppConfigModule } from 'src/config/config.module';
-import { AppConfigService } from 'src/config/config.service';
+import { MailerConfigService } from 'src/config/mailer.config.service';
 import { MailerServiceImpl } from './mailer.service';
 import { MAILER_SERVICE } from './mailer.interface';
 
@@ -9,18 +9,18 @@ import { MAILER_SERVICE } from './mailer.interface';
   imports: [
     MailerModule.forRootAsync({
       imports: [AppConfigModule],
-      useFactory: (appConfigService: AppConfigService) => {
+      useFactory: (config: MailerConfigService) => {
         return {
           transport: {
-            host: appConfigService.emailHost,
+            host: config.host,
             auth: {
-              user: appConfigService.emailUsername,
-              pass: appConfigService.emailPassword,
+              user: config.username,
+              pass: config.password,
             },
           },
         };
       },
-      inject: [AppConfigService],
+      inject: [MailerConfigService],
     }),
   ],
   providers: [

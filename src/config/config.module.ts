@@ -4,6 +4,7 @@ import { AppConfigService } from './app.config.service';
 import { validationSchema } from './validation';
 import configuration from './configuration';
 import { DatabaseConfigService } from './database.config.service';
+import { MailerConfigService } from './mailer.config.service';
 
 @Module({
   imports: [
@@ -13,7 +14,12 @@ import { DatabaseConfigService } from './database.config.service';
       validationSchema,
     }),
   ],
-  providers: [AppConfigService, ConfigService, DatabaseConfigService],
-  exports: [AppConfigService, DatabaseConfigService],
+  providers: [
+    AppConfigService,
+    ConfigService,
+    DatabaseConfigService,
+    MailerConfigService,
+  ],
+  exports: [AppConfigService, DatabaseConfigService, MailerConfigService],
 })
 export class AppConfigModule {}
