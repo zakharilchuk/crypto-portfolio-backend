@@ -15,4 +15,9 @@ export default () => ({
     port: parseInt(process.env.POSTGRES_PORT ?? '5432', 10),
     host: process.env.POSTGRES_HOST ?? 'localhost',
   },
+  mailer: {
+    host: process.env.EMAIL_HOST!,
+    username: process.env.EMAIL_USERNAME!,
+    password: process.env.EMAIL_PASSWORD!,
+  },
 });
