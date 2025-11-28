@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -38,8 +39,8 @@ export class PortfolioController {
     @User('id') userId: number,
   ) {
     return await this.portfolioService.createPortfolio(
-      createPortfolioDto,
       userId,
+      createPortfolioDto,
     );
   }
 
@@ -54,5 +55,14 @@ export class PortfolioController {
       userId,
       updatePortfolioDto,
     );
+  }
+
+  @Delete(':id')
+  public async deletePortfolio(
+    @Param('id', ParseIntPipe) portfolioId: number,
+    @User('id') userId: number,
+  ) {
+    await this.portfolioService.deletePortfolio(portfolioId, userId);
+    return { message: 'Portfolio deleted successfully' };
   }
 }

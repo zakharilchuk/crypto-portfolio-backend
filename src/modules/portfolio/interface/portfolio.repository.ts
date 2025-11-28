@@ -12,4 +12,5 @@ export interface IPortfolioRepository {
     type: PortfolioType,
   ): Promise<Portfolio>;
   updatePortfolio(portfolioId: number, name: string): Promise<Portfolio | null>;
+  deletePortfolio(portfolioId: number): Promise<void>;
 }

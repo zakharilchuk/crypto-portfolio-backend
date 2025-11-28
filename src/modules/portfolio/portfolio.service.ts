@@ -35,8 +35,8 @@ export class PortfolioService {
   }
 
   public async createPortfolio(
-    createPortfolioDto: CreatePortfolioDto,
     userId: number,
+    createPortfolioDto: CreatePortfolioDto,
   ) {
     return await this.portfolioRepository.createPortfolio(
       createPortfolioDto.name,
@@ -63,5 +63,16 @@ export class PortfolioService {
     );
 
     return updated;
+  }
+
+  public async deletePortfolio(portfolioId: number, userId: number) {
+    const portfolio = await this.portfolioRepository.findById(portfolioId);
+    if (!portfolio) throw new NotFoundException('Portfolio not found');
+
+    if (portfolio.userId !== userId) {
+      throw new ForbiddenException('Access forbidden');
+    }
+
+    await this.portfolioRepository.deletePortfolio(portfolioId);
   }
 }

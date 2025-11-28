@@ -38,4 +38,8 @@ export class PortfolioRepository implements IPortfolioRepository {
     });
     return updateResult.affected ? this.findById(portfolioId) : null;
   }
+
+  async deletePortfolio(portfolioId: number): Promise<void> {
+    await this.portfolioRepository.delete(portfolioId);
+  }
 }
