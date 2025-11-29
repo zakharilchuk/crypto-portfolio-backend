@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { User } from '../user/user.entity';
-import { PortfolioType } from './enums/portfolio-type.enum';
+import { User } from '../../user/entities/user.entity';
+import { PortfolioType } from '../enums/portfolio-type.enum';
 
 @Entity()
 export class Portfolio {

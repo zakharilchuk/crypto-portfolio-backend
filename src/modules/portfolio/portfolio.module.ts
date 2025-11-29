@@ -4,8 +4,8 @@ import { PORTFOLIO_REPOSITORY } from './interface/portfolio.repository';
 import { PortfolioRepository } from './portfolio.repository';
 import { PortfolioController } from './portfolio.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Portfolio } from './portfolio.entity';
-import { User } from '../user/user.entity';
+import { Portfolio } from './entities/portfolio.entity';
+import { User } from '../user/entities/user.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Portfolio, User])],

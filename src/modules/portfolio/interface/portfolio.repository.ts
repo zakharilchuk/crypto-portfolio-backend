@@ -1,5 +1,5 @@
 import { PortfolioType } from '../enums/portfolio-type.enum';
-import { Portfolio } from '../portfolio.entity';
+import { Portfolio } from '../entities/portfolio.entity';
 
 export const PORTFOLIO_REPOSITORY = Symbol.for('PORTFOLIO_REPOSITORY');
 

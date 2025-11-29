@@ -35,8 +35,8 @@ export class PortfolioController {
 
   @Post()
   public async createPortfolio(
-    @Body() createPortfolioDto: CreatePortfolioDto,
     @User('id') userId: number,
+    @Body() createPortfolioDto: CreatePortfolioDto,
   ) {
     return await this.portfolioService.createPortfolio(
       userId,

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import { UserRepository } from './user.repository';
 import { USER_REPOSITORY } from './interface/user.repository';
 import { UserService } from './user.service';
-import { Portfolio } from '../portfolio/portfolio.entity';
+import { Portfolio } from '../portfolio/entities/portfolio.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Portfolio])],

@@ -6,7 +6,7 @@ import {
   UpdateDateColumn,
   OneToMany,
 } from 'typeorm';
-import { Portfolio } from '../portfolio/portfolio.entity';
+import { Portfolio } from '../../portfolio/entities/portfolio.entity';
 
 @Entity()
 export class User {

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { IPortfolioRepository } from './interface/portfolio.repository';
-import { Portfolio } from './portfolio.entity';
+import { Portfolio } from './entities/portfolio.entity';
 import { PortfolioType } from './enums/portfolio-type.enum';
 
 @Injectable()

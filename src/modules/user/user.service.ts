@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { USER_REPOSITORY } from './interface/user.repository';
 import type { IUserRepository } from './interface/user.repository';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { User } from './user.entity';
+import { User } from './entities/user.entity';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
