@@ -23,12 +23,23 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle(appConfig.appName)
     .setVersion(appConfig.appVersion)
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'Authorization',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'Bearer',
+    )
+    .addSecurityRequirements('Bearer')
     .build();
 
+  app.setGlobalPrefix('api');
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
-
-  app.setGlobalPrefix('api');
 
   await app.listen(PORT);
 }
