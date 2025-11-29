@@ -5,6 +5,7 @@ import { UserModule } from './modules/user/user.module';
 import { AppConfigService } from './config/app.config.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { MailModule } from './mailer/mailer.module';
+import { PortfolioModule } from './modules/portfolio/portfolio.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { MailModule } from './mailer/mailer.module';
     UserModule,
     AuthModule,
     MailModule,
+    PortfolioModule,
   ],
   controllers: [],
   providers: [AppConfigService],
