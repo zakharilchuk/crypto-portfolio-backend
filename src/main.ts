@@ -20,6 +20,12 @@ async function bootstrap() {
 
   const PORT = appConfig.port;
 
+  app.enableCors({
+    origin: true,
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  });
+
   const config = new DocumentBuilder()
     .setTitle(appConfig.appName)
     .setVersion(appConfig.appVersion)
